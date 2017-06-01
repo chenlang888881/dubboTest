@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+     <!--加载Properties文件-->
+    <context:property-placeholder file-encoding="UTF-8" ignore-resource-not-found="false" location="classpath:config/*-${env}.properties"/>
+
+<!--    &lt;!&ndash; 使用AOP方式统一处理参数验证结果 &ndash;&gt;
+    <aop:aspectj-autoproxy proxy-target-class="true"/>-->
+
+    <!-- 最前面加入dubbo配置，保证dubbo注解在controller注解之前被扫描，扫描所有加了dubbo注解的包-->
+    <dubbo:annotation package="cn.cl.dubbo.web.controller"/>
+
+    <!-- 扫描controller -->
+    <context:component-scan base-package="cn.cl.dubbo.web.controller"/>
+
+    <!-- 视图配置 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+
+</beans>

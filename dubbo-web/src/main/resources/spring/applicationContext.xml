@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+<!--    &lt;!&ndash; 扫描dubbo注解&ndash;&gt;
+    <dubbo:annotation package="com.rapoo.ros.web.system.exception"/>-->
+
+<!--    &lt;!&ndash; 扫描system包下面的注解 &ndash;&gt;
+    <context:component-scan base-package="com.rapoo.ros.web.system"/>-->
+
+    <!-- 加载Properties文件 -->
+    <context:property-placeholder location="classpath:config/*-${env}.properties" file-encoding="UTF-8" ignore-resource-not-found="false"/>
+
+    <!--&lt;!&ndash;静态资源版本配置&ndash;&gt;
+    <bean id="staticResourceVersion" class="com.rapoo.ros.web.system.StaticResourcesVersion">
+        <property name="resVer" value="${static.resources.version}"/>
+    </bean>
+
+    <bean id="messageSource" class="com.rapoo.ros.web.system.message.FilenameWildcardsMessageSource">
+        <property name="basename" value="classpath:i18n/*messages"/>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="30"/>
+    </bean>-->
+
+    <!-- 加载dubbo配置 -->
+    <import resource="classpath:dubbo/dubbo-web-consumer.xml"/>
+</beans>
